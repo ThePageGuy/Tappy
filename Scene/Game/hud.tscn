@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://v72knlee67e5"]
+
+[ext_resource type="Script" path="res://Script/hud.gd" id="1_mr73o"]
+[ext_resource type="FontFile" uid="uid://dt1cf3mn53dci" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="1_xr2hk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q7672"]
+line_spacing = 1.0
+font = ExtResource("1_xr2hk")
+font_size = 48
+font_color = Color(0.8, 0.188235, 0.313726, 1)
+outline_size = 6
+outline_color = Color(1, 0.582802, 0.631693, 1)
+shadow_size = 7
+shadow_color = Color(0.207843, 0.207843, 0.207843, 0.47451)
+shadow_offset = Vector2(3, 2)
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mr73o")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 64.0
+offset_bottom = 73.0
+text = "0"
+label_settings = SubResource("LabelSettings_q7672")

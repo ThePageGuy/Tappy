@@ -1,13 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://cipstfkp2d4f3"]
+[gd_scene load_steps=8 format=3 uid="uid://cipstfkp2d4f3"]
 
 [ext_resource type="Texture2D" uid="uid://cvgisgc87jld" path="res://assets/background/rocks_2.png" id="1_1sy6r"]
+[ext_resource type="Script" path="res://Scene/Game/game.gd" id="1_qsede"]
 [ext_resource type="PackedScene" uid="uid://csshn0quynml8" path="res://Scene/Game/plane.tscn" id="2_bi7sg"]
 [ext_resource type="PackedScene" uid="uid://n451pkj53aim" path="res://Scene/Game/barrier.tscn" id="3_mu7wf"]
+[ext_resource type="PackedScene" uid="uid://cwmo00srxveks" path="res://Scene/TitleScreen/game_over_ui.tscn" id="5_w04b5"]
+[ext_resource type="PackedScene" uid="uid://v72knlee67e5" path="res://Scene/Game/hud.tscn" id="6_hytub"]
+[ext_resource type="PackedScene" uid="uid://cypxurkw8bgt5" path="res://Scene/Game/scrolling_bg.tscn" id="7_adcaa"]
 
 [node name="Game" type="Node2D"]
 position = Vector2(236, 313)
+script = ExtResource("1_qsede")
+
+[node name="ScrollingBG" parent="." instance=ExtResource("7_adcaa")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOverUi" parent="CanvasLayer" instance=ExtResource("5_w04b5")]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("6_hytub")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = -999
 texture = ExtResource("1_1sy6r")
 
 [node name="Plane" parent="." instance=ExtResource("2_bi7sg")]
@@ -17,3 +32,17 @@ position = Vector2(-236, -316)
 
 [node name="Barrier2" parent="." instance=ExtResource("3_mu7wf")]
 position = Vector2(-236, 557)
+
+[node name="SpawnUp" type="Marker2D" parent="."]
+position = Vector2(357, -134)
+
+[node name="SpawnDown" type="Marker2D" parent="."]
+position = Vector2(348, 274)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="PipesHolder" type="Node2D" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

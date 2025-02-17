@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://csshn0quynml8"]
+[gd_scene load_steps=12 format=3 uid="uid://csshn0quynml8"]
 
 [ext_resource type="Texture2D" uid="uid://bn2cgit6f2kx0" path="res://assets/plane/planes_sheet.png" id="1_4ofkd"]
 [ext_resource type="Script" path="res://Script/plane.gd" id="1_h35xa"]
+[ext_resource type="AudioStream" uid="uid://c0tcd11kmdv8e" path="res://assets/audio/engine.mp3" id="3_vhesl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glygp"]
 atlas = ExtResource("1_4ofkd")
@@ -35,6 +36,21 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqh6a"]
 size = Vector2(66, 54)
 
+[sub_resource type="Animation" id="Animation_bvm4q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_5pcpp"]
 resource_name = "power"
 length = 0.3
@@ -52,28 +68,13 @@ tracks/0/keys = {
 "values": [0.0, -0.349066, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_bvm4q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimSprite:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ytkt"]
 _data = {
 "RESET": SubResource("Animation_bvm4q"),
 "power": SubResource("Animation_5pcpp")
 }
 
-[node name="Plane" type="CharacterBody2D"]
+[node name="Plane" type="CharacterBody2D" groups=["Plane"]]
 script = ExtResource("1_h35xa")
 
 [node name="AnimSprite" type="AnimatedSprite2D" parent="."]
@@ -92,3 +93,5 @@ libraries = {
 }
 
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_vhesl")
+autoplay = true
